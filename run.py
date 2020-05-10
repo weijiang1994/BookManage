@@ -1,18 +1,18 @@
 """
-author:jiangwei
-project:Sample_01
-date:2019/7/27
-filename:run
-ide:PyCharm
+coding:utf-8
+file: run.py
+@author: jiangwei
+@contact: jiangwei_1994124@163.com
+@time: 2020/5/9 20:22
+@desc:
 """
-
-from _class.LoginWinClass import LoginWinClass
-import sys
+from view.login_window import LoginWindow
 from PyQt5.QtWidgets import QApplication
+import sys
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    win = LoginWinClass()
+    win = LoginWindow()
     win.show()
     sys.exit(app.exec_())
