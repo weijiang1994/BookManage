@@ -5,7 +5,8 @@ python + pyqt5搭建一个图书管理系统
 
 ### 开始
 #### 安装依赖
-pip install PyQt5
+`pip install PyQt5`
+`pip install pymysql`
 #### 安装数据库
 `安装任意一种服务器类型数据库即可`
 #### 手动建表
@@ -51,3 +52,8 @@ pip install PyQt5
 
 #### 修改数据库的连接属性
 进入util->dbutil文件,修改里面的数据库连接属性。
+
+#### 运行
+进入到项目的根目录下，
+`python run.py`
+既可以运行项目。
