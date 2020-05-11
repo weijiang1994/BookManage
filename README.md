@@ -5,12 +5,12 @@ python + pyqt5搭建一个图书管理系统
 
 ### 开始
 #### 安装依赖
-`pip install PyQt5`
-`pip install pymysql`
+1. pip install PyQt5
+2. pip install pymysql
 #### 安装数据库
-`安装任意一种服务器类型数据库即可`
-#### 手动建表
-`本来应该是写个脚本文件自动生成数据库，由于时间匆忙，没来得及写，后续版本补上。`
+安装任意一种服务器类型数据库即可
+#### 创建数据库以及建表
+进入项目根目录`cd BookManage`,运行`python generate_data.py`生成数据库文件 
 #### user表
 
 | 字段名             | 类型     | 长度 | 主键 |
@@ -48,7 +48,7 @@ python + pyqt5搭建一个图书管理系统
 | store_number    | int      | 11   | 否   |
 | borrow_number   | int      | 11   | 否   |
 | create_time     | datetime | 0    | 否   |
-| publish_date    | varchar  | 255  | 否   |
+| publish_date    | datetime  | 255  | 否   |
 
 #### 修改数据库的连接属性
 进入util->dbutil文件,修改里面的数据库连接属性。
