@@ -109,7 +109,7 @@ class BookManageWindow(Ui_Form, QWidget):
             for i in range(1, 4):
                 item = QTableWidgetItem(book[i])
                 self.tableWidget.setItem(self.tableWidget.rowCount() - 1, i - 1, item)
-            item = QTableWidgetItem(book[-1])
+            item = QTableWidgetItem(str(book[-1]))
             self.tableWidget.setItem(self.tableWidget.rowCount() - 1, 3, item)
             item = QTableWidgetItem(str(book[4]))
             self.tableWidget.setItem(self.tableWidget.rowCount() - 1, 4, item)
@@ -119,7 +119,7 @@ class BookManageWindow(Ui_Form, QWidget):
             for j in range(6):
                 item = self.tableWidget.item(i, j)
                 item.setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-
+    #
     def btn_slot(self, tag):
         if tag == 'add':
             self.add_book_win = AddBookWindow()
