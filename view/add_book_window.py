@@ -21,6 +21,7 @@ class AddBookWindow(Ui_Form, QWidget):
         super(AddBookWindow, self).__init__()
         self.setupUi(self)
         self.setWindowModality(Qt.ApplicationModal)
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
         self.setWindowTitle('添加新图书')
         self.add_book_pushButton.clicked.connect(self.add)
         self.setWindowIcon(QIcon(APP_ICON))

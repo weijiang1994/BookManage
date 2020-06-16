@@ -35,6 +35,7 @@ class BookEditWindow(Ui_Form, QWidget):
         self.setWindowModality(Qt.ApplicationModal)
         self.add_book_pushButton.setText('保存信息')
         self.setWindowIcon(QIcon(APP_ICON))
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
 
     def init_data(self):
         self.book_name_lineEdit.setText(self.current_book_info[1])
