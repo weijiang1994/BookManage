@@ -24,3 +24,18 @@ QListWidget::item:selected{
     color:#333333;
 }
 
+QPushButton{
+    border-radius: 5px;
+    height: 30px;
+    background-color: #333333;
+    color: #FFFFFF;
+    }
+
+    QPushButton:hover{
+    border-radius: 5px;
+    height: 30px;
+    background-color: #222222;
+    color: #FFFFFF;
+    }
+
+
