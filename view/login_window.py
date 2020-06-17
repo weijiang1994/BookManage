@@ -12,10 +12,9 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSignal, Qt
 from ui.login_window import Ui_Form
-from util import common_util
 from view.main_window import MainWindow
 from util.dbutil import DBHelp
-from util.common_util import msg_box, get_md5, APP_ICON
+from util.common_util import msg_box, get_md5, APP_ICON, SYS_STYLE
 from view.register_window import RegisterWindow
 
 
@@ -34,8 +33,15 @@ class LoginWindow(Ui_Form, QWidget):
     def init_ui(self):
         self.setWindowTitle('用户登录')
         self.setWindowIcon(QIcon(APP_ICON))
-        self.login_pushButton.setStyleSheet(common_util.read_qss(common_util.SUPER_DIR+r'/res/style/style.qss'))
-        self.register_pushButton.setStyleSheet(common_util.read_qss(common_util.SUPER_DIR+r'/res/style/style.qss'))
+        self.login_pushButton.setProperty('class', 'Aqua')
+        self.register_pushButton.setProperty('class', 'Aqua')
+        self.label.setStyleSheet(SYS_STYLE)
+        self.label_2.setStyleSheet(SYS_STYLE)
+        self.label_3.setStyleSheet(SYS_STYLE)
+        self.password_lineEdit.setStyleSheet(SYS_STYLE)
+        self.username_lineEdit.setStyleSheet(SYS_STYLE)
+        self.login_pushButton.setStyleSheet(SYS_STYLE)
+        self.register_pushButton.setStyleSheet(SYS_STYLE)
         self.setWindowFlags(Qt.WindowCloseButtonHint|Qt.WindowMinimizeButtonHint)
 
     def init_slot(self):

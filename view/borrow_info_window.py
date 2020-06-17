@@ -9,11 +9,11 @@ file: borrow_info_window.py
 from threading import Thread
 
 from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QColor, QFont, QBrush
+from PyQt5.QtGui import QColor
 from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem
 from ui.book_borrow_info_window import Ui_Form
 from util.dbutil import DBHelp
-from util.common_util import BORROW_STATUS_MAP
+from util.common_util import BORROW_STATUS_MAP, SYS_STYLE
 
 
 class BorrowInfoWindow(Ui_Form, QWidget):
@@ -30,6 +30,11 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.init_data()
 
     def init_ui(self):
+        self.setStyleSheet(SYS_STYLE)
+        self.refresh_pushButton.setProperty('class', 'Aqua')
+        self.search_borrow_user_pushButton.setProperty('class', 'Aqua')
+        self.refresh_pushButton.setMinimumWidth(60)
+        self.search_borrow_user_pushButton.setMinimumWidth(60)
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 

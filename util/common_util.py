@@ -55,3 +55,6 @@ def read_qss(qss_file):
 
 def get_return_day(day):
     return datetime.date.today() + datetime.timedelta(days=day)
+
+
+SYS_STYLE = read_qss(SUPER_DIR + r'/res/style/style.qss')

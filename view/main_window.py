@@ -9,7 +9,7 @@ file: main_window.py
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from ui.main_window import Ui_MainWindow
-from util.common_util import read_qss, SUPER_DIR, ROLE_MAP, APP_ICON
+from util.common_util import ROLE_MAP, APP_ICON, SYS_STYLE
 from view.home_window import HomeWindow
 from view.book_manage_window import BookManageWindow
 from view.borrow_info_window import BorrowInfoWindow
@@ -27,11 +27,11 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.init_ui()
 
     def init_ui(self):
+        self.pushButton.setProperty('class', 'Aqua')
+        self.pushButton.setMinimumWidth(60)
+        self.setStyleSheet(SYS_STYLE)
         self.setWindowIcon(QIcon(APP_ICON))
-        qss = read_qss(SUPER_DIR + r'/res/style/style.qss')
         self.setWindowTitle('图书管理系统-Version 1.0.0.0 Beta')
-        self.listWidget.setStyleSheet(qss)
-        self.setStyleSheet("QWidget:focus{outline: none;}")
         self.listWidget.setCurrentRow(0)
         self.current_username_label.setText(self.username)
         self.current_role_label.setText(self.role)
@@ -43,9 +43,13 @@ class MainWindow(Ui_MainWindow, QMainWindow):
 
     def init_slot(self):
         self.listWidget.currentItemChanged.connect(self.item_changed)
+        self.pushButton.clicked.connect(self.log_out)
 
     def item_changed(self):
         self.stackedWidget.setCurrentIndex(self.listWidget.currentRow())
+
+    def log_out(self):
+        pass
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, '消息', '确定退出系统吗?',

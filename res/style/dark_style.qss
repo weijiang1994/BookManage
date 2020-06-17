@@ -1,0 +1,39 @@
+QListWidget{
+    background:#ccc;
+    color:#000000;
+    font: 14pt Arial;
+    border:0px solid gray;
+    padding:0px;
+}
+
+QListWidget::item{
+    width:94px;
+    height:45px;
+    border:0px solid gray;
+    padding-left:24px;
+}
+
+QListWidget::item:selected:active{
+    background:#dddddd;
+    color:#333333;
+    border-width:-1;
+}
+
+QListWidget::item:selected{
+    background:#eeeeee;
+    color:#333333;
+}
+
+QPushButton{
+    border-radius: 5px;
+    height: 30px;
+    background-color: #333333;
+    color: #FFFFFF;
+    }
+
+    QPushButton:hover{
+    border-radius: 5px;
+    height: 30px;
+    background-color: #222222;
+    color: #FFFFFF;
+    }

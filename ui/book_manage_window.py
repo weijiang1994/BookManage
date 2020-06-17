@@ -20,6 +20,7 @@ class Ui_Form(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.search_comboBox = QtWidgets.QComboBox(Form)
+        self.search_comboBox.setMaximumSize(QtCore.QSize(16777215, 16777215))
         self.search_comboBox.setStyleSheet("font: 12pt \"宋体\";")
         self.search_comboBox.setObjectName("search_comboBox")
         self.search_comboBox.addItem("")

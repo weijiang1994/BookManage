@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget
 from ui.borrow_info_window import Ui_Form
-from util.common_util import msg_box, get_uuid, get_return_day, get_current_time, APP_ICON
+from util.common_util import msg_box, get_uuid, get_return_day, get_current_time, APP_ICON, SYS_STYLE
 from util.dbutil import DBHelp
 
 
@@ -27,6 +27,8 @@ class BorrowBookWindow(Ui_Form, QWidget):
         self.book_name_lineEdit.setText(self.book_name)
         self.borrow_pushButton.clicked.connect(self.borrow_book)
         self.setWindowModality(Qt.ApplicationModal)
+        self.borrow_pushButton.setProperty('class', 'Aqua')
+        self.setStyleSheet(SYS_STYLE)
 
     def borrow_book(self):
         borrow_day = self.borrow_day_lineEdit.text()

@@ -7,9 +7,10 @@ file: register_window.py
 @desc:
 """
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget
 from ui.register_window import Ui_Form
-from util.common_util import msg_box, get_md5, get_uuid, get_current_time
+from util.common_util import msg_box, get_md5, get_uuid, get_current_time, SYS_STYLE, APP_ICON
 from util.dbutil import DBHelp
 
 
@@ -18,8 +19,16 @@ class RegisterWindow(Ui_Form, QWidget):
         super(RegisterWindow, self).__init__()
         self.setupUi(self)
         self.setWindowTitle('用户注册')
+        self.init_ui()
         self.register_pushButton.clicked.connect(self.register)
+
+    def init_ui(self):
+        self.register_pushButton.setProperty('class', 'Aqua')
+        self.setStyleSheet(SYS_STYLE)
+        self.register_pushButton.setMinimumWidth(60)
+        self.setWindowIcon(QIcon(APP_ICON))
         self.setWindowModality(Qt.ApplicationModal)
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
 
     def register(self):
         username = self.username_lineEdit.text()
@@ -45,3 +54,6 @@ class RegisterWindow(Ui_Form, QWidget):
         self.close()
 
 
+if __name__ == '__main__':
+    win = RegisterWindow()
+    win.show()

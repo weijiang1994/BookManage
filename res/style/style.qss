@@ -1,41 +1,106 @@
-QListWidget{
-    background:#ccc;
-    color:#000000;
-    font: 14pt Arial;
-    border:0px solid gray;
-    padding:0px;
+* {
+    font-family: "Microsoft YaHei";
 }
 
-QListWidget::item{
-    width:94px;
-    height:45px;
-    border:0px solid gray;
-    padding-left:24px;
+QWidget:focus{
+    outline: none;
 }
 
-QListWidget::item:selected:active{
-    background:#dddddd;
-    color:#333333;
-    border-width:-1;
-}
-
-QListWidget::item:selected{
-    background:#eeeeee;
-    color:#333333;
-}
-
-QPushButton{
-    border-radius: 5px;
+QPushButton[class="Aqua"] {
+    border-radius: 4px;
     height: 30px;
-    background-color: #333333;
-    color: #FFFFFF;
-    }
+    background-color: #3bafda;
+}
 
-    QPushButton:hover{
-    border-radius: 5px;
+QPushButton:hover[class="Aqua"] {
+    background-color: #4fc1e9;
+}
+
+QPushButton:pressed[class="Aqua"] {
+    background: qradialgradient(cx:0.5,
+    cy: 0.5,
+    fx: 0.5,
+    fy: 0.5,
+    radius: 1.5,
+    stop: 0.2 #4fc1e9,
+    stop: 0.8 #3bafda);
+}
+
+QLineEdit {
+    border: 1px solid #aab2bd;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 5px 8px;
+    selection-background-color: lightgray;
+}
+
+QLineEdit:focus {
+    border: 1px solid #3bafda;
+}
+
+
+/*QComboBox*/
+QComboBox {
+    border: 1px solid #aab2bd;
+    border-radius: 4px;
+    font-size: 12px;
+    padding: 3px 5px;
+}
+
+QComboBox::drop-down {
+    background-color: transparent;
+}
+
+QComboBox::down-arrow {
+    image: url(./res/style/img/more.png);
+    padding-right: 10px;
+    padding-top: 2px;
+}
+
+QComboBox::!editable:on {
+    border: 1px solid #3bafda;
+}
+
+QComboBox QAbstractItemView{
+    border: 2px solid #e6e9ed;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item{
     height: 30px;
-    background-color: #222222;
+    border-bottom: 1px solid #e6e9ed;
+}
+
+QComboBox QAbstractItemView::item:hover{
+    background-color: #3bafda;
     color: #FFFFFF;
-    }
+}
 
+QComboBox QAbstractItemView::item:selected{
+    background-color: #3bafda;
+    color: #FFFFFF;
+}
 
+/*QListWidget,QListView*/
+QListWidget,QListView {
+    font: 14pt;
+    border: 1px solid #ccd1d9;
+    outline: none;
+    padding: 0;
+}
+
+QListWidget::item,QListView::item {
+    height: 35px;
+    padding-left: 5px;
+    border-bottom: 1px solid #e6e9ed;
+}
+
+QListWidget::item:hover,QListView::item:hover{
+    background-color: #3bafda;
+    color: #FFFFFF;
+}
+
+QListWidget::item:selected,QListView::item:selected{
+    background-color: #3bafda;
+    color: #FFFFFF;
+}

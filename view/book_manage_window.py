@@ -40,6 +40,12 @@ class BookManageWindow(Ui_Form, QWidget):
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.refresh_pushButton.setProperty('class', 'Aqua')
+        self.add_book_pushButton.setProperty('class', 'Aqua')
+        self.search_book_pushButton.setProperty('class', 'Aqua')
+        self.search_book_pushButton.setMinimumWidth(60)
+        self.add_book_pushButton.setMinimumWidth(80)
+        self.refresh_pushButton.setMinimumWidth(60)
         self.tableWidget.customContextMenuRequested.connect(self.generate_menu)
         if self.user_role == '普通用户':
             self.add_book_pushButton.setVisible(False)

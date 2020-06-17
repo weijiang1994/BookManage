@@ -10,7 +10,7 @@ from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QWidget
 from ui.add_book_window import Ui_Form
-from util.common_util import msg_box, get_current_time, get_uuid, APP_ICON
+from util.common_util import msg_box, get_current_time, get_uuid, APP_ICON, SYS_STYLE
 from util.dbutil import DBHelp
 
 
@@ -25,6 +25,8 @@ class AddBookWindow(Ui_Form, QWidget):
         self.setWindowTitle('添加新图书')
         self.add_book_pushButton.clicked.connect(self.add)
         self.setWindowIcon(QIcon(APP_ICON))
+        self.add_book_pushButton.setProperty('class', 'Aqua')
+        self.setStyleSheet(SYS_STYLE)
 
     def add(self):
         book_name = self.book_name_lineEdit.text()
