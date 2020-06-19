@@ -57,3 +57,12 @@ python + pyqt5搭建一个图书管理系统
 进入到项目的根目录下，
 `python run.py`
 既可以运行项目。
+### 部分示例页面
+#### 1.登陆页面
+![登陆页面](https://github.com/weijiang1994/BookManage/blob/master/screenshoot/login.png)
+#### 2.借阅管理页面
+![借阅管理页面](https://github.com/weijiang1994/BookManage/blob/master/screenshoot/borrow_book.png)
+#### 3.主界面
+![主页面](https://github.com/weijiang1994/BookManage/blob/master/screenshoot/main.png)
+
+
