@@ -18,10 +18,11 @@ from view.borrow_info_window import BorrowInfoWindow
 # noinspection PyCallByClass
 class MainWindow(Ui_MainWindow, QMainWindow):
 
-    def __init__(self, username=None, role=None):
+    def __init__(self,login=None, username=None, role=None):
         super(MainWindow, self).__init__()
         self.setupUi(self)
         self.username = username
+        self.login_win = login
         self.role = ROLE_MAP.get(str(role))
         self.init_slot()
         self.init_ui()
@@ -49,7 +50,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.stackedWidget.setCurrentIndex(self.listWidget.currentRow())
 
     def log_out(self):
-        pass
+        self.close()
+        self.login_win.show()
 
     def closeEvent(self, event):
         reply = QMessageBox.question(self, '消息', '确定退出系统吗?',

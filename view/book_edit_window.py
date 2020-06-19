@@ -50,7 +50,6 @@ class BookEditWindow(Ui_Form, QWidget):
     def get_book_info(self):
         db = DBHelp()
         count, res = db.query_super(table_name='book', column_name='booK_name', condition=self.book_info)
-        print(res)
         self.current_book_info = list(res[0])
         self.init_book_info_done_signal.emit()
         db.instance = None

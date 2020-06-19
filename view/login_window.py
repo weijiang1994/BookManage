@@ -84,6 +84,6 @@ class LoginWindow(Ui_Form, QWidget):
             return
         if login_result == 111:
             username = self.username_lineEdit.text()
-            self.main_window = MainWindow(username=username, role=self.role)
+            self.main_window = MainWindow(login=self, username=username, role=self.role)
             self.main_window.show()
             self.close()
