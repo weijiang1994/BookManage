@@ -125,7 +125,7 @@ class BookManageWindow(Ui_Form, QWidget):
             for j in range(6):
                 item = self.tableWidget.item(i, j)
                 item.setTextAlignment(Qt.AlignVCenter | Qt.AlignHCenter)
-    #
+
     def btn_slot(self, tag):
         if tag == 'add':
             self.add_book_win = AddBookWindow()

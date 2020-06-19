@@ -21,6 +21,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def __init__(self,login=None, username=None, role=None):
         super(MainWindow, self).__init__()
         self.setupUi(self)
+        self.is_change_user = False
         self.username = username
         self.login_win = login
         self.role = ROLE_MAP.get(str(role))
@@ -50,14 +51,20 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.stackedWidget.setCurrentIndex(self.listWidget.currentRow())
 
     def log_out(self):
+        self.is_change_user = True
         self.close()
-        self.login_win.show()
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, '消息', '确定退出系统吗?',
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-
+        if self.is_change_user:
+            reply = QMessageBox.question(self, '消息', '确定退出当前账号吗?',
+                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        else:
+            reply = QMessageBox.question(self, '消息', '确定退出系统吗?',
+                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             event.accept()
+            if self.is_change_user:
+                self.login_win.show()
         else:
             event.ignore()
+            self.is_change_user = False

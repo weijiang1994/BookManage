@@ -6,9 +6,11 @@ file: register_window.py
 @time: 2020/5/9 20:47
 @desc:
 """
+import sys
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QApplication
 from ui.register_window import Ui_Form
 from util.common_util import msg_box, get_md5, get_uuid, get_current_time, SYS_STYLE, APP_ICON
 from util.dbutil import DBHelp
@@ -55,5 +57,7 @@ class RegisterWindow(Ui_Form, QWidget):
 
 
 if __name__ == '__main__':
+    app = QApplication(sys.argv)
     win = RegisterWindow()
     win.show()
+    sys.exit(app.exec())

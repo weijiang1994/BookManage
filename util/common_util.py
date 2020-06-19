@@ -20,7 +20,7 @@ EDIT_ICON = SUPER_DIR + r'/res/img/edit.png'
 BORROW_BOOK = SUPER_DIR + r'/res/img/borrow_book.png'
 HOME_PAGE = SUPER_DIR + r'/res/img/home.png'
 BORROW_STATUS_MAP = {'0': '未还', '1': '已还'}
-SEARCH_CONTENT_MAP = {'书名': 'book_name', '出版社': 'publish_company', '作者': 'author'}
+SEARCH_CONTENT_MAP = {'书名': 'book_name', '出版社': 'publish_company', '作者': 'author', '用户': 'borrow_user'}
 
 
 def get_md5(data):

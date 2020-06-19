@@ -2,6 +2,10 @@
     font-family: "Microsoft YaHei";
 }
 
+QWidget{
+    background-color: rgb(255, 255, 255);
+}
+
 QWidget:focus{
     outline: none;
 }

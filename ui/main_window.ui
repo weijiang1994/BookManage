@@ -76,7 +76,7 @@
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color: rgb(126, 127, 113);</string>
+         <string notr="true">background-color: rgb(222, 222, 222);</string>
         </property>
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -96,7 +96,7 @@
              </size>
             </property>
             <property name="styleSheet">
-             <string notr="true">background-color: rgb(126, 127, 113);</string>
+             <string notr="true">background-color: rgb(222, 222, 222);</string>
             </property>
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -194,7 +194,7 @@
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: rgb(126, 127, 113);</string>
+           <string notr="true">background-color: rgb(222, 222, 222);</string>
           </property>
           <property name="orientation">
            <enum>Qt::Horizontal</enum>

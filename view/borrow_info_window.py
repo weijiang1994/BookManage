@@ -10,10 +10,10 @@ from threading import Thread
 
 from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem
+from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QMessageBox
 from ui.book_borrow_info_window import Ui_Form
 from util.dbutil import DBHelp
-from util.common_util import BORROW_STATUS_MAP, SYS_STYLE
+from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box
 
 
 class BorrowInfoWindow(Ui_Form, QWidget):
@@ -26,10 +26,28 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.username = username
         self.borrow_info_list = list()
         self.init_data_done_signal.connect(self.show_info)
+        self.refresh_pushButton.clicked.connect(self.init_data)
+        self.search_borrow_user_pushButton.clicked.connect(self.search_borrow_info)
         self.init_ui()
         self.init_data()
 
+    def search_borrow_info(self):
+        if self.borrow_user_search_lineEdit.text() == '':
+            msg_box(self, '提示', '请输入需要搜索的内容!')
+            return
+        if self.user_role == '管理员':
+            search_type = self.comboBox.currentText()
+            search_content = self.borrow_user_search_lineEdit.text()
+            db = DBHelp()
+            count, res = db.query_super(table_name='borrow_info', column_name=SEARCH_CONTENT_MAP.get(search_type),
+                                        condition=search_content)
+            if count == 0:
+                msg_box(widget=self, title='提示', msg='未找到相关记录!')
+                return
+            self.method_name(db, res=res)
+
     def init_ui(self):
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
         self.setStyleSheet(SYS_STYLE)
         self.refresh_pushButton.setProperty('class', 'Aqua')
         self.search_borrow_user_pushButton.setProperty('class', 'Aqua')
@@ -39,6 +57,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
 
     def init_data(self):
+        self.borrow_user_search_lineEdit.clear()
         th = Thread(target=self.book_info_th)
         th.start()
 
@@ -70,6 +89,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
             self.method_name(db, res)
 
     def method_name(self, db, res):
+        self.borrow_info_list.clear()
         for record in res:
             book_id = record[1]
             count, book_info = db.query_super(table_name='book', column_name='id', condition=book_id)
