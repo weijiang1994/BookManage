@@ -105,7 +105,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.horizontalLayout_2, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
 
@@ -128,7 +128,7 @@ class Ui_MainWindow(object):
         item = self.listWidget.item(4)
         item.setText(_translate("MainWindow", "关于"))
         self.listWidget.setSortingEnabled(__sortingEnabled)
-        self.label.setText(_translate("MainWindow", "欢迎使用图书管理系统"))
+        self.label.setText(_translate("MainWindow", "XX大学图书管理系统"))
         self.label_2.setText(_translate("MainWindow", "用户:"))
         self.current_username_label.setText(_translate("MainWindow", "张三"))
         self.label_4.setText(_translate("MainWindow", "角色:"))

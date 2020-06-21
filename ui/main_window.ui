@@ -109,7 +109,7 @@
              <string notr="true">font: 14pt &quot;宋体&quot;;</string>
             </property>
             <property name="text">
-             <string>欢迎使用图书管理系统</string>
+             <string>XX大学图书管理系统</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
@@ -219,7 +219,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
