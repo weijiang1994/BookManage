@@ -14,11 +14,14 @@ import frozen_dir
 
 SUPER_DIR = frozen_dir.app_path()
 ROLE_MAP = {'0': '管理员', '1': '普通用户'}
+
 APP_ICON = SUPER_DIR + r'/res/img/app-icon.png'
 DELETE_ICON = SUPER_DIR + r'/res/img/delete.png'
 EDIT_ICON = SUPER_DIR + r'/res/img/edit.png'
 BORROW_BOOK = SUPER_DIR + r'/res/img/borrow_book.png'
 HOME_PAGE = SUPER_DIR + r'/res/img/home.png'
+DELAY_TIME = SUPER_DIR + r'/res/img/delay_time.ico'
+RETURN = SUPER_DIR + r'/res/img/return.ico'
 BORROW_STATUS_MAP = {'0': '未还', '1': '已还'}
 SEARCH_CONTENT_MAP = {'书名': 'book_name', '出版社': 'publish_company', '作者': 'author', '用户': 'borrow_user'}
 

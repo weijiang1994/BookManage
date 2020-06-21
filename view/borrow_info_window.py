@@ -9,11 +9,11 @@ file: borrow_info_window.py
 from threading import Thread
 
 from PyQt5.QtCore import pyqtSignal, Qt
-from PyQt5.QtGui import QColor
-from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QMessageBox
+from PyQt5.QtGui import QColor, QIcon
+from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QMessageBox, QMenu, QAction
 from ui.book_borrow_info_window import Ui_Form
 from util.dbutil import DBHelp
-from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box
+from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box, EDIT_ICON, RETURN, DELAY_TIME
 
 
 class BorrowInfoWindow(Ui_Form, QWidget):
@@ -28,8 +28,28 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.init_data_done_signal.connect(self.show_info)
         self.refresh_pushButton.clicked.connect(self.init_data)
         self.search_borrow_user_pushButton.clicked.connect(self.search_borrow_info)
+        self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
+        self.tableWidget.customContextMenuRequested.connect(self.generate_menu)
+        self.return_flag = []
         self.init_ui()
         self.init_data()
+
+    def generate_menu(self, pos):
+        row_num = -1
+        for i in self.tableWidget.selectionModel().selection().indexes():
+            row_num = i.row()
+        if row_num == -1:
+            return
+        if self.user_role == '普通用户':
+            menu = QMenu()
+            return_action = QAction(u'还书')
+            return_action.setIcon(QIcon(RETURN))
+            menu.addAction(return_action)
+
+            delay_borrow_action = QAction(u'续借')
+            delay_borrow_action.setIcon(QIcon(DELAY_TIME))
+            menu.addAction(delay_borrow_action)
+            action = menu.exec_(self.tableWidget.mapToGlobal(pos))
 
     def search_borrow_info(self):
         if self.borrow_user_search_lineEdit.text() == '':
