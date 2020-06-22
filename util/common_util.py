@@ -46,6 +46,14 @@ def msg_box(widget, title, msg):
     QMessageBox.warning(widget, title, msg, QMessageBox.Yes)
 
 
+def accept_box(widget, title, msg, func, arg):
+    rep = QMessageBox.warning(widget, title, msg, QMessageBox.Yes|QMessageBox.No, QMessageBox.No)
+    if rep == QMessageBox.Yes:
+        func(arg)
+    else:
+        return
+
+
 def get_current_time():
     dt = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     return dt

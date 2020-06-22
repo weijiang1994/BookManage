@@ -12,7 +12,7 @@ import pymysql
 class DBHelp:
     instance = None
 
-    def __init__(self, host='127.0.0.1', port=3306, user='root', pwd='1994124', db='book', charset='utf8'):
+    def __init__(self, host='127.0.0.1', port=3306, user='root', pwd='19940124', db='book', charset='utf8'):
         self._conn = pymysql.connect(host=host, port=port, user=user, passwd=pwd, db=db, charset=charset)
         self._cur = self._conn.cursor()
 
@@ -59,6 +59,10 @@ class DBHelp:
         sql = "update book set store_number=store_number-1 where id='{}'".format(book_id)
         self._cur.execute(sql)
         sql = "update book set borrow_number=borrow_number+1 where id='{}'".format(book_id)
+        self._cur.execute(sql)
+
+    def update_borrow_statue(self, book_id):
+        sql = "update borrow_info set return_flag=1 where id='{}'".format(book_id)
         self._cur.execute(sql)
 
     def insert_borrow_info(self, data):

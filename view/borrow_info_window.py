@@ -13,7 +13,7 @@ from PyQt5.QtGui import QColor, QIcon
 from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QMessageBox, QMenu, QAction
 from ui.book_borrow_info_window import Ui_Form
 from util.dbutil import DBHelp
-from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box, EDIT_ICON, RETURN, DELAY_TIME
+from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box, RETURN, DELAY_TIME, accept_box
 
 
 class BorrowInfoWindow(Ui_Form, QWidget):
@@ -31,6 +31,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.tableWidget.setContextMenuPolicy(Qt.CustomContextMenu)
         self.tableWidget.customContextMenuRequested.connect(self.generate_menu)
         self.return_flag = []
+        self.borrow_info_id = []
         self.init_ui()
         self.init_data()
 
@@ -49,7 +50,28 @@ class BorrowInfoWindow(Ui_Form, QWidget):
             delay_borrow_action = QAction(u'续借')
             delay_borrow_action.setIcon(QIcon(DELAY_TIME))
             menu.addAction(delay_borrow_action)
+
+            # 如果当前条目为已还则菜单栏为不可点击状态
+            if self.return_flag[row_num] == 1:
+                return_action.setEnabled(False)
+                delay_borrow_action.setEnabled(False)
             action = menu.exec_(self.tableWidget.mapToGlobal(pos))
+
+            if action == return_action:
+                try:
+                    accept_box(self, '提示', '确定归还当前书本吗？', func=self.return_book,
+                               arg=self.borrow_info_id[row_num])
+                except :
+                    import traceback
+                    traceback.print_exc()
+
+    def return_book(self, borrow_id):
+        db = DBHelp()
+        db.update_borrow_statue(borrow_id)
+        db.db_commit()
+        db.instance = None
+        del db
+
 
     def search_borrow_info(self):
         if self.borrow_user_search_lineEdit.text() == '':
@@ -64,7 +86,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
             if count == 0:
                 msg_box(widget=self, title='提示', msg='未找到相关记录!')
                 return
-            self.method_name(db, res=res)
+            self.get_data_from_database(db, res=res)
 
     def init_ui(self):
         self.setWindowFlags(Qt.WindowCloseButtonHint)
@@ -102,18 +124,22 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         if self.user_role == '管理员':
             db = DBHelp()
             count, res = db.query_all(table_name='borrow_info')
-            self.method_name(db, res)
+            self.get_data_from_database(db, res)
         else:
             db = DBHelp()
             count, res = db.query_super(table_name='borrow_info', column_name='borrow_user', condition=self.username)
-            self.method_name(db, res)
+            self.get_data_from_database(db, res)
 
-    def method_name(self, db, res):
+    def get_data_from_database(self, db, res):
+        self.return_flag = []
+        self.borrow_info_id = []
         self.borrow_info_list.clear()
         for record in res:
             book_id = record[1]
+            self.borrow_info_id.append(book_id)
             count, book_info = db.query_super(table_name='book', column_name='id', condition=book_id)
             sub_info = [record[3], record[2], book_info[0][3], book_info[0][-1], record[4], str(record[6]),
                         str(record[7]), BORROW_STATUS_MAP.get(str(record[-1]))]
+            self.return_flag.append(record[-1])
             self.borrow_info_list.append(sub_info)
         self.init_data_done_signal.emit(self.borrow_info_list)
