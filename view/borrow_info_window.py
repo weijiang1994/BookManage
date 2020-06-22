@@ -18,6 +18,7 @@ from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, m
 
 class BorrowInfoWindow(Ui_Form, QWidget):
     init_data_done_signal = pyqtSignal(list)
+    return_book_done_signal = pyqtSignal()
 
     def __init__(self, user_role=None, username=None):
         super(BorrowInfoWindow, self).__init__()
@@ -58,12 +59,9 @@ class BorrowInfoWindow(Ui_Form, QWidget):
             action = menu.exec_(self.tableWidget.mapToGlobal(pos))
 
             if action == return_action:
-                try:
-                    accept_box(self, '提示', '确定归还当前书本吗？', func=self.return_book,
-                               arg=self.borrow_info_id[row_num])
-                except :
-                    import traceback
-                    traceback.print_exc()
+                if accept_box(self, '提示', '确实归还当前书本吗？') == QMessageBox.Yes:
+                    th = Thread(target=self.return_book, args=(self.borrow_info_id[row_num],))
+                    th.start()
 
     def return_book(self, borrow_id):
         db = DBHelp()
@@ -71,7 +69,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         db.db_commit()
         db.instance = None
         del db
-
+        self.init_data()
 
     def search_borrow_info(self):
         if self.borrow_user_search_lineEdit.text() == '':
@@ -136,7 +134,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.borrow_info_list.clear()
         for record in res:
             book_id = record[1]
-            self.borrow_info_id.append(book_id)
+            self.borrow_info_id.append(record[0])
             count, book_info = db.query_super(table_name='book', column_name='id', condition=book_id)
             sub_info = [record[3], record[2], book_info[0][3], book_info[0][-1], record[4], str(record[6]),
                         str(record[7]), BORROW_STATUS_MAP.get(str(record[-1]))]
