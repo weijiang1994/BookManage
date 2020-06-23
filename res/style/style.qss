@@ -108,3 +108,105 @@ QListWidget::item:selected,QListView::item:selected{
     background-color: #3bafda;
     color: #FFFFFF;
 }
+
+/*QTableWidget,QTableView*/
+QHeaderView{
+    height: 40px;
+    border: 0 solid rgba(255, 255, 255, 0);
+    background-color: #fff;
+    border-bottom: 2px solid #e6e9ed;
+}
+
+QHeaderView::section{
+    height: 40px;
+    border: 0 solid rgba(255, 255, 255, 0);
+    background-color: #fff;
+    outline: none;
+}
+
+QTableWidget,QTableView{
+    border: 1px solid #ccd1d9;
+    alternate-background-color: #f1f2f6;
+    background-color: #fff;
+    selection-background-color : #3bafda;
+}
+
+/*QTabWidget*/
+QTabWidget{
+    border:1px solid #ccd1d9;
+}
+
+QTabWidget::pane { /* The tab widget frame */
+    border: none;
+    background-color: #fff;
+    border-radius: 3px;
+    border-top-left-radius: 0;
+}
+
+QTabBar::tab {
+    padding: 8px 30px;
+    background-color: #fff;
+}
+
+QTabBar::tab:first {
+    border-top-left-radius: 3px;
+}
+
+QTabBar::tab:!selected {
+    border-left: 1px solid #ccd1d9;
+    background-color: #e6e9ed;
+}
+
+/*QCalendarWidget*/
+QCalendarWidget{
+    background-color: #fff;
+}
+
+QCalendarWidget QToolButton {
+  	height: 60px;
+  	color: white;
+  	font-size: 18px;
+    font-weight: 700;
+  	icon-size: 20px, 20px;
+    background-color: #3bafda;
+}
+
+QCalendarWidget QToolButton:hover{
+    border: transparent;
+}
+
+QCalendarWidget QToolButton:pressed{
+    border: transparent;
+    background-color: #4fc1e9;
+}
+
+QCalendarWidget QToolButton#qt_calendar_prevmonth{
+    qproperty-icon: url('%PATH%/img/arrow-left.png');
+}
+
+QCalendarWidget QToolButton#qt_calendar_nextmonth{
+    qproperty-icon: url('%PATH%/img/arrow-right.png');
+}
+
+QCalendarWidget QToolButton#qt_calendar_monthbutton::menu-indicator{
+    background-color: #3bafda;
+}
+
+QCalendarWidget QToolButton#qt_calendar_monthbutton::menu-indicator:pressed{
+    background-color: #4fc1e9;
+}
+
+QCalendarWidget QWidget {
+    alternate-background-color: #FFFFFF;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #3bafda;
+}
+
+QCalendarWidget QAbstractItemView {
+    padding: 11px;
+	font-size:14px;
+    outline: none;
+    selection-color: #FFF;
+}

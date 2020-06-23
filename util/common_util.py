@@ -8,6 +8,9 @@ file: common_util.py
 """
 import datetime
 import hashlib
+
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox
 import uuid
 import frozen_dir
@@ -22,8 +25,14 @@ BORROW_BOOK = SUPER_DIR + r'/res/img/borrow_book.png'
 HOME_PAGE = SUPER_DIR + r'/res/img/home.png'
 DELAY_TIME = SUPER_DIR + r'/res/img/delay_time.ico'
 RETURN = SUPER_DIR + r'/res/img/return.ico'
+DEL_RECORD = SUPER_DIR + r'/res/img/delete.ico'
+PUSH_RETURN = SUPER_DIR + r'/res/img/push.ico'
+
 BORROW_STATUS_MAP = {'0': '未还', '1': '已还'}
 SEARCH_CONTENT_MAP = {'书名': 'book_name', '出版社': 'publish_company', '作者': 'author', '用户': 'borrow_user'}
+
+
+PATTERS = ['^[0-9]{1,2}$']
 
 
 def get_md5(data):
@@ -61,7 +70,14 @@ def read_qss(qss_file):
 
 
 def get_return_day(day):
-    return datetime.date.today() + datetime.timedelta(days=day)
+    return (datetime.datetime.now() + datetime.timedelta(days=day)).strftime('%Y-%m-%d %H:%M:%S')
+
+
+def set_le_reg(widget, le, pattern):
+    rx = QRegExp()
+    rx.setPattern(pattern)
+    qrx = QRegExpValidator(rx, widget)
+    le.setValidator(qrx)
 
 
 SYS_STYLE = read_qss(SUPER_DIR + r'/res/style/style.qss')

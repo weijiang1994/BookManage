@@ -12,7 +12,7 @@ import pymysql
 class DBHelp:
     instance = None
 
-    def __init__(self, host='127.0.0.1', port=3306, user='root', pwd='1994124', db='book', charset='utf8'):
+    def __init__(self, host='127.0.0.1', port=3306, user='root', pwd='19940124', db='book', charset='utf8'):
         self._conn = pymysql.connect(host=host, port=port, user=user, passwd=pwd, db=db, charset=charset)
         self._cur = self._conn.cursor()
 
@@ -61,6 +61,12 @@ class DBHelp:
         sql = "update book set borrow_number=borrow_number+1 where id='{}'".format(book_id)
         self._cur.execute(sql)
 
+    def update_borrow_return(self, book_id):
+        sql = "update book set store_number=store_number+1 where id='{}'".format(book_id)
+        self._cur.execute(sql)
+        sql = "update book set borrow_number=borrow_number-1 where id='{}'".format(book_id)
+        self._cur.execute(sql)
+
     def update_borrow_statue(self, book_id):
         sql = "update borrow_info set return_flag=1 where id='{}'".format(book_id)
         self._cur.execute(sql)
@@ -69,6 +75,20 @@ class DBHelp:
         sql = "insert into borrow_info (id, book_id, book_name, borrow_user, borrow_num, borrow_days, borrow_time," \
               "return_time, return_flag) values (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         self._cur.execute(sql, data)
+
+    def update_renew(self, data):
+        sql = "update borrow_info set borrow_days=borrow_days+{}, return_time='{}' where id='{}'".format(data[0],
+                                                                                                        data[1],
+                                                                                                        data[2])
+        self._cur.execute(sql)
+
+    def insert_ask_return_info(self, data):
+        sql = "insert into ask_return (id , user_name, borrow_id, is_read, time) values(%s, %s, %s, %s, %s)"
+        self._cur.execute(sql, data)
+
+    def update_ask_return_info(self, id):
+        sql = "update ask_return set is_read=1 where id='{}'".format(id)
+        self._cur.execute(sql)
 
     def db_commit(self):
         self._conn.commit()

@@ -28,8 +28,8 @@ try:
     conn.select_db('book')
 
     print('create user table...')
-    cur.execute("create table if not exists user ("
-                "id varchar(50) primary key,"
+    cur.execute("CREATE TABLE IF NOT EXISTS user ("
+                "id varchar(50) PRIMARY KEY,"
                 "username varchar(255),"
                 "password varchar(255),"
                 "role int(11),"
@@ -40,8 +40,8 @@ try:
     print('------------------------------------')
 
     print('create book table...')
-    cur.execute("create table if not exists book("
-                "id varchar(50) primary key,"
+    cur.execute("CREATE TABLE IF NOT EXISTS book("
+                "id varchar(50) PRIMARY KEY,"
                 "book_name varchar(255),"
                 "author varchar(255),"
                 "publish_company varchar(255),"
@@ -53,8 +53,8 @@ try:
     print('------------------------------------')
 
     print('create borrow_info table...')
-    cur.execute("create table if not exists borrow_info ("
-                "id varchar(50) primary key,"
+    cur.execute("CREATE TABLE IF NOT EXISTS borrow_info ("
+                "id varchar(50) PRIMARY KEY,"
                 "book_id varchar(50),"
                 "book_name varchar(255),"
                 "borrow_user varchar(255),"
@@ -65,6 +65,16 @@ try:
                 "return_flag int(11))")
     print('borrow_info table created done.')
     print('------------------------------------')
+
+    print('create ask_return table...')
+    cur.execute("create table if not exists ask_return ("
+                "id int(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,"
+                "user_name varchar(50) NOT NULL,"
+                "borrow_id varchar(50) NOT NULL,"
+                "is_read int(11) NOT NULL,"
+                "time datetime)")
+    print('ask_return table created done.')
+    print('-'*30)
     print('operate done.')
     print('create database successful.')
 except Exception as e:

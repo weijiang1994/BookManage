@@ -13,7 +13,9 @@ from PyQt5.QtGui import QColor, QIcon
 from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidgetItem, QMessageBox, QMenu, QAction
 from ui.book_borrow_info_window import Ui_Form
 from util.dbutil import DBHelp
-from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box, RETURN, DELAY_TIME, accept_box
+from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box, RETURN, DELAY_TIME, accept_box, \
+    DELETE_ICON, PUSH_RETURN
+from view.renew_window import RenewWindow
 
 
 class BorrowInfoWindow(Ui_Form, QWidget):
@@ -25,6 +27,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
         self.setupUi(self)
         self.user_role = user_role
         self.username = username
+        self.renew_win = None
         self.borrow_info_list = list()
         self.init_data_done_signal.connect(self.show_info)
         self.refresh_pushButton.clicked.connect(self.init_data)
@@ -62,6 +65,35 @@ class BorrowInfoWindow(Ui_Form, QWidget):
                 if accept_box(self, '提示', '确实归还当前书本吗？') == QMessageBox.Yes:
                     th = Thread(target=self.return_book, args=(self.borrow_info_id[row_num],))
                     th.start()
+
+            if action == delay_borrow_action:
+                self.renew_win = RenewWindow(borrow_id=self.borrow_info_id[row_num])
+                self.renew_win.show()
+        else:
+            menu = QMenu()
+            del_record_action = QAction(u'删除记录')
+            del_record_action.setIcon(QIcon(DELETE_ICON))
+            menu.addAction(del_record_action)
+
+            ask_return_action = QAction(u'催还')
+            ask_return_action.setIcon(QIcon(PUSH_RETURN))
+            menu.addAction(ask_return_action)
+
+            # 根据是否已经归还来判断菜单是否为可点击状态
+            if self.return_flag[row_num] == 1:
+                ask_return_action.setEnabled(False)
+            else:
+                del_record_action.setEnabled(False)
+
+            action = menu.exec_(self.tableWidget.mapToGlobal(pos))
+
+            if action == del_record_action:
+                rep = accept_box(self, '警告', '确定删除该条记录吗?')
+                if rep == QMessageBox.Yes:
+                    pass
+
+            if action == ask_return_action:
+                pass
 
     def return_book(self, borrow_id):
         db = DBHelp()
@@ -113,6 +145,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
                 if info[i] == '已还':
                     item.setBackground(QColor('#33ff33'))
                 self.tableWidget.setItem(self.tableWidget.rowCount() - 1, i, item)
+
         for i in range(self.tableWidget.rowCount()):
             for j in range(self.tableWidget.columnCount()):
                 item = self.tableWidget.item(i, j)
@@ -137,7 +170,7 @@ class BorrowInfoWindow(Ui_Form, QWidget):
             self.borrow_info_id.append(record[0])
             count, book_info = db.query_super(table_name='book', column_name='id', condition=book_id)
             sub_info = [record[3], record[2], book_info[0][3], book_info[0][-1], record[4], str(record[6]),
-                        str(record[7]), BORROW_STATUS_MAP.get(str(record[-1]))]
-            self.return_flag.append(record[-1])
+                        str(record[7]), BORROW_STATUS_MAP.get(str(record[-2]))]
+            self.return_flag.append(record[-2])
             self.borrow_info_list.append(sub_info)
         self.init_data_done_signal.emit(self.borrow_info_list)
