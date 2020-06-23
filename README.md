@@ -8,7 +8,7 @@ python + pyqt5搭建一个图书管理系统
 1. pip install PyQt5
 2. pip install pymysql
 #### 安装数据库
-安装任意一种服务器类型数据库即可
+安装任意一种服务器类型数据库即可[Mariadb下载](https://mariadb.org/)
 #### 创建数据库以及建表
 进入项目根目录`cd BookManage`,运行`python generate_data.py`生成数据库文件 
 
