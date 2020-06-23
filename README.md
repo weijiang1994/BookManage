@@ -57,6 +57,20 @@ python + pyqt5搭建一个图书管理系统
 进入到项目的根目录下，
 `python run.py`
 既可以运行项目。
+### 包含功能
+1. 权限分级
+  - 普通用户
+  - 管理员用户
+2. 普通用户
+  - 借书
+  - 还书
+  - 续借
+3. 管理员用户
+  - 添加图书
+  - 编辑图书
+  - 删除图书
+  - 催还
+
 ### 部分示例页面
 #### 1.登陆页面
 ![登陆页面](https://github.com/weijiang1994/BookManage/blob/master/screenshoot/login.png)
