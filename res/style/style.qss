@@ -2,6 +2,23 @@
     font-family: "Microsoft YaHei";
 }
 
+QListWidget,QListView[class="News"] {
+    border: 1px solid #ccd1d9;
+    outline: none;
+    padding: 0;
+}
+
+QListWidget::item,QListView::item[class="News"] {
+    height: 35px;
+    padding-left: 5px;
+    border-bottom: 1px solid #e6e9ed;
+}
+
+QListWidget::item:selected,QListView::item:selected[class="News"] {
+    background-color: #F6F8FA;
+    color: #000000;
+}
+
 QWidget{
     background-color: rgb(255, 255, 255);
 }
@@ -86,25 +103,25 @@ QComboBox QAbstractItemView::item:selected{
 }
 
 /*QListWidget,QListView*/
-QListWidget,QListView {
+QListWidget[class="Normal"],QListView[class="Normal"] {
     font: 14pt;
     border: 1px solid #ccd1d9;
     outline: none;
     padding: 0;
 }
 
-QListWidget::item,QListView::item {
+QListWidget::item[class="Normal"],QListView::item [class="Normal"] {
     height: 45px;
     padding-left: 5px;
     border-bottom: 1px solid #e6e9ed;
 }
 
-QListWidget::item:hover,QListView::item:hover{
+QListWidget::item:hover[class="Normal"],QListView::item:hover[class="Normal"] {
     background-color: #3bafda;
     color: #FFFFFF;
 }
 
-QListWidget::item:selected,QListView::item:selected{
+QListWidget::item:selected[class="Normal"],QListView::item:selected[class="Normal"] {
     background-color: #3bafda;
     color: #FFFFFF;
 }
@@ -157,56 +174,51 @@ QTabBar::tab:!selected {
     background-color: #e6e9ed;
 }
 
-/*QCalendarWidget*/
-QCalendarWidget{
-    background-color: #fff;
+/*QScrollBar*/
+QScrollBar:vertical {
+    max-width: 13px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: 1px solid #ccd1d9;
 }
 
-QCalendarWidget QToolButton {
-  	height: 60px;
-  	color: white;
-  	font-size: 18px;
-    font-weight: 700;
-  	icon-size: 20px, 20px;
-    background-color: #3bafda;
+QScrollBar::handle:vertical {
+    background-color: #cdced1;
 }
 
-QCalendarWidget QToolButton:hover{
-    border: transparent;
+QScrollBar::handle:vertical:hover {
+    background: #a9b2bd;
 }
 
-QCalendarWidget QToolButton:pressed{
-    border: transparent;
-    background-color: #4fc1e9;
+QScrollBar::add-line:vertical {
+    background-color: #ccd1d9;
+
 }
 
-QCalendarWidget QToolButton#qt_calendar_prevmonth{
-    qproperty-icon: url('%PATH%/img/arrow-left.png');
+QScrollBar::add-page:vertical,QScrollBar::sub-page:vertical {
+    background-color: #e6e9ed;
 }
 
-QCalendarWidget QToolButton#qt_calendar_nextmonth{
-    qproperty-icon: url('%PATH%/img/arrow-right.png');
+QScrollBar:horizontal {
+    max-height: 13px;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-right: 1px solid #ccd1d9;
 }
 
-QCalendarWidget QToolButton#qt_calendar_monthbutton::menu-indicator{
-    background-color: #3bafda;
+QScrollBar::handle:horizontal {
+    background-color: #cdced1;
 }
 
-QCalendarWidget QToolButton#qt_calendar_monthbutton::menu-indicator:pressed{
-    background-color: #4fc1e9;
+QScrollBar::handle:horizontal:hover {
+    background: #a9b2bd;
 }
 
-QCalendarWidget QWidget {
-    alternate-background-color: #FFFFFF;
+QScrollBar::add-line:horizontal {
+    background-color: #ccd1d9;
 }
 
-QCalendarWidget QWidget#qt_calendar_navigationbar {
-    background-color: #3bafda;
+QScrollBar::add-page:horizontal,QScrollBar::sub-page:horizontal {
+    background-color: #e6e9ed;
 }
 
-QCalendarWidget QAbstractItemView {
-    padding: 11px;
-	font-size:14px;
-    outline: none;
-    selection-color: #FFF;
-}

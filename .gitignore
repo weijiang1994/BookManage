@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 # C extensions
+test/
 *.so
 .idea/
 # Distribution / packaging

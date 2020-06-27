@@ -34,9 +34,9 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.label_3)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.listWidget_2 = QtWidgets.QListWidget(Form)
-        self.listWidget_2.setObjectName("listWidget_2")
-        self.horizontalLayout.addWidget(self.listWidget_2)
+        self.cnblogs_news_listWidget = QtWidgets.QListWidget(Form)
+        self.cnblogs_news_listWidget.setObjectName("cnblogs_news_listWidget")
+        self.horizontalLayout.addWidget(self.cnblogs_news_listWidget)
         self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.gridLayout.addLayout(self.verticalLayout_2, 1, 0, 1, 1)
 
@@ -47,5 +47,5 @@ class Ui_Form(object):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_2.setText(_translate("Form", "新消息"))
-        self.label_3.setText(_translate("Form", "待办事项"))
+        self.label_3.setText(_translate("Form", "新闻"))
 

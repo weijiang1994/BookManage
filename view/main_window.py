@@ -31,6 +31,7 @@ class MainWindow(Ui_MainWindow, QMainWindow):
     def init_ui(self):
         self.pushButton.setProperty('class', 'Aqua')
         self.pushButton.setMinimumWidth(60)
+        self.listWidget.setProperty('class', 'Normal')
         self.setStyleSheet(SYS_STYLE)
         self.setWindowIcon(QIcon(APP_ICON))
         self.setWindowTitle('图书管理系统-Version 1.0.0.0 Beta')
