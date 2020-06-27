@@ -7,12 +7,13 @@ file: main_window.py
 @desc:
 """
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QMessageBox, QWidget
 from ui.main_window import Ui_MainWindow
 from util.common_util import ROLE_MAP, APP_ICON, SYS_STYLE
 from view.home_window import HomeWindow
 from view.book_manage_window import BookManageWindow
 from view.borrow_info_window import BorrowInfoWindow
+from view.setting_window import SettingWindow
 
 
 # noinspection PyCallByClass
@@ -43,6 +44,8 @@ class MainWindow(Ui_MainWindow, QMainWindow):
         self.stackedWidget.addWidget(HomeWindow())
         self.stackedWidget.addWidget(BorrowInfoWindow(user_role=self.role, username=self.username))
         self.stackedWidget.addWidget(BookManageWindow(self.role, self.username))
+        self.stackedWidget.addWidget(SettingWindow())
+        self.stackedWidget.addWidget(QWidget())
 
     def init_slot(self):
         self.listWidget.currentItemChanged.connect(self.item_changed)

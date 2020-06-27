@@ -14,6 +14,7 @@ from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtWidgets import QMessageBox
 import uuid
 import frozen_dir
+import yaml
 
 SUPER_DIR = frozen_dir.app_path()
 ROLE_MAP = {'0': '管理员', '1': '普通用户'}
@@ -31,6 +32,7 @@ PUSH_RETURN = SUPER_DIR + r'/res/img/push.ico'
 BORROW_STATUS_MAP = {'0': '未还', '1': '已还'}
 SEARCH_CONTENT_MAP = {'书名': 'book_name', '出版社': 'publish_company', '作者': 'author', '用户': 'borrow_user'}
 
+CONFIG_FILE_PATH = SUPER_DIR + r'/config/setting.yml'
 
 PATTERS = ['^[0-9]{1,2}$']
 
@@ -45,6 +47,13 @@ def get_md5(data):
     b = data.encode(encoding='utf-8')
     m.update(b)
     return m.hexdigest()
+
+
+def read_yaml(path):
+    with open(path, encoding='utf-8') as f:
+        stm = f.read()
+    content = yaml.load(stm, Loader=yaml.FullLoader)
+    return content
 
 
 def get_uuid():

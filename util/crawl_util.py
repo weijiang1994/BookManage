@@ -8,11 +8,11 @@
 import requests
 import re
 
-url = 'https://news.cnblogs.com/NewsAjax/GetRecommendNews?itemCount=10'
+url = 'https://news.cnblogs.com/NewsAjax/GetRecommendNews?itemCount='
 
 
-def get_cnblogs_recommend_news():
-    res = requests.get(url=url)
+def get_cnblogs_recommend_news(count):
+    res = requests.get(url=url+str(count))
     if res.status_code == 200:
         return res.text
     else:
@@ -26,7 +26,7 @@ def parse_news(news):
 
 
 if __name__ == '__main__':
-    news = get_cnblogs_recommend_news()
+    news = get_cnblogs_recommend_news(100)
     content = parse_news(news)
     print(content)
 

@@ -13,7 +13,7 @@ from PyQt5.QtCore import pyqtSignal
 from PyQt5.QtWidgets import QWidget, QApplication
 from ui.home_window import Ui_Form
 from util.crawl_util import parse_news, get_cnblogs_recommend_news
-from util.common_util import SYS_STYLE
+from util.common_util import SYS_STYLE, read_yaml, CONFIG_FILE_PATH
 
 
 class HomeWindow(Ui_Form, QWidget):
@@ -36,7 +36,8 @@ class HomeWindow(Ui_Form, QWidget):
 
     def get_news(self):
         try:
-            self.news = get_cnblogs_recommend_news()
+            count = read_yaml(CONFIG_FILE_PATH)['news_limit']
+            self.news = get_cnblogs_recommend_news(count)
             self.titles, self.urls = parse_news(self.news)
             self.get_news_done_signal.emit(1)
         except:
