@@ -8,15 +8,15 @@ QListWidget,QListView[class="News"] {
     padding: 0;
 }
 
-QListWidget::item,QListView::item[class="News"] {
+QListWidget::item[class="News"],QListView::item[class="News"] {
     height: 35px;
     padding-left: 5px;
     border-bottom: 1px solid #e6e9ed;
 }
 
-QListWidget::item:selected,QListView::item:selected[class="News"] {
-    background-color: #F6F8FA;
-    color: #000000;
+QListWidget::item:selected[class="News"],QListView::item:selected[class="News"] {
+    background-color: #2C974B;
+    color: #FFFFFF;
 }
 
 QWidget{
@@ -176,7 +176,7 @@ QTabBar::tab:!selected {
 
 /*QScrollBar*/
 QScrollBar:vertical {
-    max-width: 13px;
+    max-width: 8px;
     padding-top: 0;
     padding-bottom: 0;
     border-bottom: 1px solid #ccd1d9;
