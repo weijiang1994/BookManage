@@ -14,8 +14,9 @@ from PyQt5.QtWidgets import QWidget, QHeaderView, QAbstractItemView, QTableWidge
 from ui.book_borrow_info_window import Ui_Form
 from util.dbutil import DBHelp
 from util.common_util import BORROW_STATUS_MAP, SYS_STYLE, SEARCH_CONTENT_MAP, msg_box, RETURN, DELAY_TIME, accept_box, \
-    DELETE_ICON, PUSH_RETURN
+    DELETE_ICON, PUSH_RETURN, get_current_time
 from view.renew_window import RenewWindow
+from view.ask_return_window import AskReturnWindow
 
 
 class BorrowInfoWindow(Ui_Form, QWidget):
@@ -93,7 +94,11 @@ class BorrowInfoWindow(Ui_Form, QWidget):
                     pass
 
             if action == ask_return_action:
-                pass
+                index = self.tableWidget.currentRow()
+                borrow_id = self.borrow_info_id[index]
+                borrow_user = self.tableWidget.item(index, 0).text()
+                self.ask_win = AskReturnWindow(data=[borrow_user, borrow_id, 0, get_current_time()])
+                self.ask_win.show()
 
     def return_book(self, borrow_id):
         db = DBHelp()

@@ -12,7 +12,7 @@ import pymysql
 class DBHelp:
     instance = None
 
-    def __init__(self, host='127.0.0.1', port=3306, user='root', pwd='1994124', db='book', charset='utf8'):
+    def __init__(self, host='127.0.0.1', port=3306, user='root', pwd='19940124', db='book', charset='utf8'):
         self._conn = pymysql.connect(host=host, port=port, user=user, passwd=pwd, db=db, charset=charset)
         self._cur = self._conn.cursor()
 
@@ -83,8 +83,9 @@ class DBHelp:
         self._cur.execute(sql)
 
     def insert_ask_return_info(self, data):
-        sql = "insert into ask_return (id , user_name, borrow_id, is_read, time) values(%s, %s, %s, %s, %s)"
-        self._cur.execute(sql, data)
+        sql = "insert into ask_return (user_name, borrow_id, ask_reason, is_read, time) values ('{}', '{}', '{}', {}," \
+              " '{}')".format(data[0], data[1], data[2], data[3], data[4])
+        self._cur.execute(sql)
 
     def update_ask_return_info(self, id):
         sql = "update ask_return set is_read=1 where id='{}'".format(id)
