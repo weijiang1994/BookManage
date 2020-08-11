@@ -16,7 +16,7 @@ pip install pymysql -i https://pypi.douban.com/simple
 进入项目根目录`cd BookManage`,运行`python generate_data.py`生成数据库文件 
 
 #### 修改数据库的连接属性
-进入util->dbutil文件,修改里面的数据库连接属性。
+进入`util->dbutil`文件,修改里面的数据库连接属性。
 
 #### 运行
 进入到项目的根目录下，
