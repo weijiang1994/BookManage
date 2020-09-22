@@ -6,10 +6,10 @@
 @Software: PyCharm
 """
 import pymysql
-host = '127.0.0.1'
-port = 3306
-user = 'root'
-password = '19940124'
+host = ''
+port = 0
+user = ''
+password = ''
 print('Starting the create database operation, please enter the information required for the database.')
 print('------------------------------------')
 host = input('please input database host:')
